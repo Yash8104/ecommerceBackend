@@ -7,6 +7,11 @@ router.get('/', (req,res)=>{
 })
 
 router.get('/home', (req,res)=>{
+    try{
+        console.log(req.user.name)
+    }catch(error){
+        console.log('error no user.name ')
+    }
     res.render('home.ejs')
 })
 

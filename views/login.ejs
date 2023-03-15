@@ -1,0 +1,22 @@
+<%- include('partials/header.ejs') %>
+
+
+<!-- body -->
+<h1>Login</h1>
+<form action="/auth/login" method="POST">
+    <div>
+        <label for="email">Email</label>
+        <input type="text" id="email" name="email" required>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+
+    <button type="submit">Login</button>
+</form>
+<% if (messages.error){ %>
+    <p id="error"><%= messages.error %></p>
+<% } %>
+
+<%- include('partials/footer.ejs') %>

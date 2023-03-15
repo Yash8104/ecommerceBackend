@@ -1,12 +1,12 @@
 const { Router } = require('express')
 const router = Router()
+const {checkAuthenticated} = require('../middleware/authUser')
 
-
-router.get('/', (req,res)=>{
+router.get('/', checkAuthenticated, (req,res)=>{
     res.send('Products lmao')
 })
 
-router.get('/:id', (req,res)=>{
+router.get('/:id',checkAuthenticated, (req,res)=>{
     res.send('some product lmao')
 })
 

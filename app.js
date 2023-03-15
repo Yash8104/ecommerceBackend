@@ -2,7 +2,35 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const cookieParser = require('cookie-parser')
+const passport = require('passport')
+const flash = require('express-flash')
+const session = require('express-session')
+const methodOverride = require('method-override')
 
+const User = require('./models/User')
+
+const initializePassport = require('./config/passport-config')
+initializePassport(passport, async (email) => {
+    try {
+        const user = await User.findOne({email:email})
+        // console.log(user.email)
+        return user
+        
+    } catch (error) {
+        console.log(error.message)
+        return null
+    }
+}, async (id)=>{
+    try {
+        const user = await User.findById(id)
+        // console.log(user.email)
+        return user
+        
+    } catch (error) {
+        console.log(error.message)
+        return null
+    }
+})
 const app = express()
 
 // routes
@@ -13,10 +41,19 @@ const aboutusRouter = require('./routes/aboutus')
 
 // middleware
 app.use(express.static('public'))
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({extended: false}))
 app.use(express.json())
 app.use(morgan('dev'))
+app.use(flash())
+app.use(session({
+    secret: "amogus",
+    resave: false,
+    saveUninitialized: false,
+}))
 
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(methodOverride('_method'))
 
 // view engine
 
