@@ -1,0 +1,63 @@
+<div class="main_body_container">
+            
+    <div class="elements-container">
+
+        
+
+        <div class="upper_body_container">
+
+            <div class="product_image_container">
+                <img class="product_image" src="/products/<%= product.imagePath %>" alt="">
+            </div>
+
+            <div class="product_details_container">
+                <p id="product_name"><%= product.title %></p>
+                <h1 class="product_price">₹<%= product.price %></h1>
+
+                <ul class="products_details_list">
+                    <%= product.description %>
+                </ul>
+
+
+                <div class="buttons_container">
+                <button class="product_buttons">Add to cart</button>
+                <button style="background-color: #FFA41C;" class="product_buttons">Buy now</button>
+                </div>
+
+                <h2 class="product_price">Write a review</h2>
+                <form action="/products/<%= product._id %>" method="POST">
+                    <p>Title:</p>
+                    <input type="text" name="title">
+                    <br>
+                    <p>Rating:</p>
+                    <input type="number" name="rating" id="rating" min="1" max="5">
+                    <br>
+                    <p>Description</p>
+                    <textarea name="description"></textarea>
+                    <br>
+                    <button type="submit">Submit Review</button>
+                </form>
+
+                <h2 class="product_price">Reviews</h2>
+                
+                <% reviews.forEach(review => { %>
+                    <div style="background-color: gray; width: 500px;">
+                        <h3><%= review.author %>,</h3>
+                        <p>Rating: <%= review.rating %></p>
+                        <p>Title: <%= review.title %></p>
+
+                        <p>Description:<%= review.description %></p>
+                    </div>
+                    <br>
+                    <% }) %>
+
+            </div>
+
+
+        </div>
+
+
+        
+    </div>
+
+</div>
