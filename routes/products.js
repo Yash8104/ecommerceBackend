@@ -6,14 +6,25 @@ const Review = require('../models/Review')
 const path = require('path')
 
 router.get('/',checkAuthenticated, async(req,res)=>{
+    
+    let query =  Product.find()
+
+    if(req.query.title != null && req.query.title != ''){
+        query = query.regex(`title`, new RegExp(req.query.title,'i'))
+    }
+
     try {
-        const products = await Product.find({}).limit(9).exec()
-        res.render('products.ejs',{products:products})
+        const products = await query.exec()
+        res.render('products.ejs',{products:products, value: req.query.title})
+
+
     } catch (error) {
         console.log(error.message)
         res.redirect('/')
     }
 })
+
+
 
 router.get('/add', checkAuthenticated, (req,res)=>{
     res.render('productSubmit.ejs')
