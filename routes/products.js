@@ -3,6 +3,7 @@ const router = Router()
 const {checkAuthenticated} = require('../middleware/authUser')
 const Product = require('../models/Product')
 const Review = require('../models/Review')
+const path = require('path')
 
 router.get('/',checkAuthenticated, async(req,res)=>{
     try {
@@ -20,12 +21,22 @@ router.get('/add', checkAuthenticated, (req,res)=>{
 
 router.post('/add',checkAuthenticated, async(req,res)=>{
     try {
+
+        const { image } = req.files;
+        if (!image){
+            throw new Error('Image is null')
+            return res.sendStatus(400);
+        }
+
+        // image.mv(__dirname + '/upload/' + image.name)
+        image.mv(path.resolve(__dirname, "..", "public","products",image.name))
+        const imagepath = image.name;
         const product = await Product.create({
             title:req.body.title,
             price:req.body.price,
             description:req.body.description,
             rating:req.body.rating,
-            imagePath:req.body.imagepath,
+            imagePath:imagepath,
         })
         res.redirect('/products')
     } catch (error) {

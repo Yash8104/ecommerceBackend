@@ -5,6 +5,7 @@ const passport = require('passport')
 const flash = require('express-flash')
 const session = require('express-session')
 const methodOverride = require('method-override')
+const fileUpload = require('express-fileupload')
 
 const User = require('./models/User')
 
@@ -53,6 +54,7 @@ app.use(session({
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(methodOverride('_method'))
+app.use(fileUpload())
 
 // view engine
 
