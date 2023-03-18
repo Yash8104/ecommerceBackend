@@ -36,7 +36,6 @@ router.post('/add',checkAuthenticated, async(req,res)=>{
         const { image } = req.files;
         if (!image){
             throw new Error('Image is null')
-            return res.sendStatus(400);
         }
 
         // image.mv(__dirname + '/upload/' + image.name)
@@ -48,6 +47,7 @@ router.post('/add',checkAuthenticated, async(req,res)=>{
             description:req.body.description,
             rating:req.body.rating,
             imagePath:imagepath,
+            shippingCost: req.body.shippingCost
         })
         res.redirect('/products')
     } catch (error) {
@@ -85,7 +85,7 @@ router.post('/:id', checkAuthenticated, async(req,res)=>{
         await product.reviews.push(review)
         await product.save()
         
-        console.log(product.reviews[0])
+        
         // console.log(req.user)
         res.redirect(`/products/${req.params.id}`)
 

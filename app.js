@@ -38,6 +38,7 @@ const homeRouter = require('./routes/home')
 const authRouter = require('./routes/auth')
 const productRouter = require('./routes/products')
 const aboutusRouter = require('./routes/aboutus')
+const cartRouter = require('./routes/cart')
 
 // middleware
 app.use(express.static('public'))
@@ -77,7 +78,7 @@ app.use('/',homeRouter);
 app.use('/auth',authRouter);
 app.use('/products',productRouter);
 app.use('/aboutus',aboutusRouter);
-
+app.use('/cart',cartRouter);
 
 
 // server listening

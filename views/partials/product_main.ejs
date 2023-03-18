@@ -14,13 +14,18 @@
                 <p id="product_name"><%= product.title %></p>
                 <h1 class="product_price">₹<%= product.price %></h1>
 
+                <p>Shipping cost: ₹<%= product.shippingCost %></p>
+
                 <ul class="products_details_list">
                     <%= product.description %>
                 </ul>
 
 
                 <div class="buttons_container">
-                <button class="product_buttons">Add to cart</button>
+                    <form action="/cart/<%= product._id %>" method="post">
+                        <button class="product_buttons" onclick="addCart()">Add to cart</button>
+                    
+                </form>
                 <button style="background-color: #FFA41C;" class="product_buttons">Buy now</button>
                 </div>
 

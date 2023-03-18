@@ -21,6 +21,10 @@ const productSchema = mongoose.Schema({
         type: String,
         required: [true, 'Please enter the image path of the product']
     },
+    shippingCost:{
+        type: Number,
+        required: [true, 'Please enter the shipping cost of the product']
+    },
     reviews: [
         {
             type: mongoose.Schema.Types.ObjectId,
