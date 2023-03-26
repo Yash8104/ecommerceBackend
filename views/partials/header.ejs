@@ -5,19 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Unique Aesthetics</title>
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/product.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
 </head>
 <body>
-    <nav>
-        <h1><a href="/">Unique Aesthetics</a></h1>
-        <ul>
-            <li><a href="/home">Home</a></li>
-            <li><a href="/auth/login">Login</a></li>
-            <li><a href="/auth/signup">Signup</a></li>
-            <li><a href="/products">products</a></li>
-            <li><a href="/aboutus">About us</a></li>
-            <li><a href="/cart">Cart</a></li>
+    <nav class="navbar">
+        <ul class="links-container">
+             <li class="link-item"><a href="/home" class="link active">Home</a></li>
+             <li class="link-item"><a href="/products" class="link">Products</a></li>
+             <li class="link-item"><a href="/aboutus" class="link">About</a></li>
+             <li class="link-item"><a href="/contactus" class="link">Contact</a></li>
+             <li class="link-item"><a href="/auth/login" class="link">Login</a></li>
+             <li class="link-item"><a href="/auth/signup" class="link">Signup</a></li>
         </ul>
-    </nav>
+        <div class="user-interactions">
+             <div class="cart">
+               <a href="/cart">
+                  <img src="/statics/cart-1.png" class="cart-icon">
+                  <span class="cart-item-count">00</span>
+               </a>
+             </div>
+             <div class="user">
+                  <img src="/statics/user-2.png" class="user-icon" alt="">
+             </div>
+        </div>
+   </nav>
 </body>

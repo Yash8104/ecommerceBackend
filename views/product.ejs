@@ -1,16 +1,291 @@
 <%- include('partials/header.ejs') %>
 
+<style>
+    .product-section{
+    width: 100%;
+    margin-top: 120px;
+    padding: 0px 5vw;
+    display: flex;
+    gap: 40px;
+
+}
+
+.product-img{
+    width: 70%;
+    height: 600px;
+    object-fit: cover;
+
+}
+
+.product-title{
+    font-size: 60px;
+
+}
+
+.product-des{
+    margin: 30px 0;
+    font-family: 'lato', sans-serif;
+    opacity: 0.5;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.rating{
+    display: flex;
+}
+
+.rating .star{
+    width: 30px;
+    height: 30px;
+}
+
+.rating-count{
+    font-family: 'lato', sans-serif;
+    opacity: 0.4;
+    font-size: 14px;
+    line-height: 40px;
+    margin-left: 20px;
+
+}
+
+.price{
+    font-size: 60px;
+    margin: 30px 0;   
+}
+
+.product-btn{
+    padding: 15px 40px;
+    border: none;
+    color: #fff;
+    outline: none;
+    margin-right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+.buy-btn{
+    background-color: #d5be8b;
+}
+
+.cart-btn{
+    background-color: #190c05;
+}
+
+.detail-des, .add-review-section{
+    width: 100%;
+    padding: 10px 6vw 0;
+}
+
+.review-headline, .review-field{
+    width: 100%;
+    height: 40px;
+    border: 2px solid #c9c9c9;
+    margin: 10px 0;
+    padding: 10px;
+    line-height: 40px;
+    font-family: 'lato', sans-serif;
+    color: #000;
+    outline: none;
+    text-transform: capitalize;
+}
+
+::placeholder{
+    color: #c9c9c9; 
+}
+
+.review-field{
+    height: 160px;
+    resize: none;
+    padding: 0 10px;
+}
+
+.review-headline:focus,
+.review-field:focus{
+    border-color: #d5be8b;
+
+}
+
+.review-headline:focus::placeholder,
+.review-field:focus::placeholder{
+    color: #d5be8b; 
+}
+
+.rating-text{
+    font-family: 'lato', sans-serif;
+    color: #c9c9c9;
+    text-transform: uppercase;
+    margin: 10px 0;
+}
+
+.rating-star{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.add-review-btn{
+    border: none;
+    outline: none;
+    background: #d5be8b;
+    padding: 10px 20px;
+    color: #fff;
+    font-family: 'lato', sans-serif;
+    font-size: 16px;
+    text-transform: capitalize;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+nav {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 18px;
+}
+
+nav a:hover {
+    color: #d5be80;
+}
+
+/* Review section */
+.reviews-section {
+    padding: 70px 10;
+    margin-top: 30px;
+    background-color: whitesmoke;
+  }
+  
+  .section-title {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 30px;
+  }
+  
+  .reviews-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .review {
+    width: 350px;
+    padding: 30px;
+    margin: 20px;
+    background-color: #d5be8b;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .review-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .review-text {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+  
+  .review-rating {
+    font-size: 24px;
+    margin-top: 15px;
+  }
+  
+  .rating-star {
+    color: #ffd700;
+  }
+
+  .review-username {
+    font-size: 18px;
+    font-style: italic;
+    margin-top: 10px;
+    text-align: left;
+  }
+</style>
+
 <!-- body -->
-<header>
 
+<section class="product-section">
+    <img src="/products/<%= product.imagePath %>" class="product-img" alt="">
+    <div class="product-detail">
+        <h1 class="product-title"><%= product.title %></h1>
+        <p class="product-des"><%= product.description %></p>
 
-    <div class="body_container">
-
-        <%- include('partials/product_main.ejs') %>
-        
+        <!--Readymade ratings image to be added similar to the image down filled for actual ratings! That is why left blank!-->
+        <p class="price">₹<%= product.price %></p>
+        <div class="btn-container">
+            <button class="product-btn buy-btn">Buy Now</button>
+            <form action="/cart/<%= product._id %>" method="post">
+                <button class="product-btn cart-btn">Add to Cart</button>
+            </form>
+            
+        </div>
     </div>
+   </section>
 
+   <form action="/products/<%= product._id %>" method="POST">
+    <section class="add-review-section">
+        <h1 class="section-title">Add a review</h1>
+        <input type="text" class="review-headline" placeholder="review headline" name="title">
+        <textarea placeholder="review" class="review-field" name="description"></textarea>
+        <p class="rating-text">How much you liked the product</p>
+        <input type="number" name="rating" id="rating" min="1" max="5">
+        <br>
+        <div class="review-rating">
+            <span class="rating-star">&#9734;</span>
+            <span class="rating-star">&#9734;</span>
+            <span class="rating-star">&#9734;</span>
+            <span class="rating-star">&#9734;</span>
+            <span class="rating-star">&#9734;</span>
+        </div>
+        <button class="add-review-btn" type="submit">Add review</button>
+    </form>
 
-</header>
+    
+
+    
+   </section>
+
+   <section class="reviews-section"> 
+    <div class="reviews-container">
+        <% reviews.forEach(review => { %>
+            <div class="review">
+                <h2 class="review-title"><%= review.title %></h2>
+                <p class="review-text"><%= review.description %></p>
+                  <p class="review-username"><%= review.author %></p>
+                <div class="review-rating">
+                  <span class="rating-star">&#9733;</span>
+                  <span class="rating-star">&#9733;</span>
+                  <span class="rating-star">&#9733;</span>
+                  <span class="rating-star">&#9733;</span>
+                  <span class="rating-star">&#9733;</span>
+                </div>
+              </div>
+
+            
+            <% }) %>
+      
+    </div>
+  </section>
+
+<!-- body -->
 
 <%- include('partials/footer.ejs') %>

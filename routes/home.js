@@ -15,4 +15,12 @@ router.get('/home', (req,res)=>{
     res.render('home.ejs')
 })
 
+router.get('/aboutus', (req,res)=>{
+    res.render('contactus.ejs')
+})
+
+router.get('/contactus', (req,res)=>{
+    res.redirect('/aboutus')
+})
+
 module.exports = router;
