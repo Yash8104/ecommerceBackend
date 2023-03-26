@@ -13,34 +13,47 @@
     </style>
     <h2>Shopping Cart</h2>
     <br><br>
+    <% if (cart != null) { %>
+        <% if (cart.products != null) { %>
     <p>Your order, Items: <%= cart.totalItems %></p>
-    <div class="allproducts">
-        <% cart.products.forEach(p => { %>
-            <div class="product-container">
-                <a href="/products/<%= p.product._id %>" style="text-decoration: none;color: black">
-                <img  height="150" width="100" src="products/<%= p.product.imagePath %>" alt="">
-                
-                <p><%= p.product.title %></p>
-                <br>
-                <p>Price: ₹<%= p.product.price %> x<%= p.quantity %></p>
-                
-            </a>
-            <form action="/cart/remove/<%= p.product._id %>" method="POST">
-                <input type="number" name="quantity" id="quantity" min="1" max="<%=p.quantity %>">
-                <button type="submit">remove</button>
-            </form>
-            </div>
-        <% }) %>
         
-    </div>
-    
-    <br>
+        <div class="allproducts">
+            <% cart.products.forEach(p => { %>
+                <div class="product-container">
+                    <a href="/products/<%= p.product._id %>" style="text-decoration: none;color: black">
+                    <img  height="150" width="100" src="products/<%= p.product.imagePath %>" alt="">
+                    
+                    <p><%= p.product.title %></p>
+                    <br>
+                    <p>Price: ₹<%= p.product.price %> x<%= p.quantity %></p>
+                    
+                </a>
+                <form action="/cart/remove/<%= p.product._id %>" method="POST">
+                    <input type="number" name="quantity" id="quantity" min="1" max="<%=p.quantity %>">
+                    <button type="submit">remove</button>
+                </form>
+                </div>
+            <% }) %>
+
+            
+        </div>
+
+        <br>
     <p>Delivery: ₹<%= cart.totalShippingCost %></p>
     <p>Price of all items: ₹<%= cart.totalPrice %></p>
 
     <br>
     <br>
     <p>Total Price: ₹<%= cart.totalShippingCost +  cart.totalPrice %></p>
+
+    <% }}  else{%>
+
+            <p>EMPTY CART</p>
+
+        <% } %>
+    
+    
+    
 
 </header>
 
