@@ -60,7 +60,7 @@ tbody td {
 	margin: 0;
 }
 
-.checkout button {
+.checkout a {
 	background-color: #333;
 	color: #fff;
 	font-size: 18px;
@@ -68,9 +68,10 @@ tbody td {
 	padding: 10px 20px;
 	cursor: pointer;
 	transition: all 0.2s ease-in-out;
+	text-decoration: none;
 }
 
-.checkout button:hover {
+.checkout a:hover {
 	background-color: #fff;
 	color: #333;
 	border: 1px solid #333;
@@ -145,10 +146,12 @@ tbody td {
                     <!-- Yaha par rows daal de na as the user adds the items to the cart-->
                 </tbody>
             </table>
+			
             <div class="checkout">
                 <p>Total: ₹0.00</p>
-                <button>Checkout</button>
+				<a href="/checkout">Checkout</a>
             </div>
+			
         </div>
 
         <% } %>

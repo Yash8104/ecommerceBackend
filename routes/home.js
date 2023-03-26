@@ -23,4 +23,10 @@ router.get('/contactus', (req,res)=>{
     res.redirect('/aboutus')
 })
 
+
+
+router.get('/checkout', (req,res)=>{
+    res.render('checkout.ejs')
+})
+
 module.exports = router;
